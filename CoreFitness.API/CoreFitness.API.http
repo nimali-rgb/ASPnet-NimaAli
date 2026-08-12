@@ -1,0 +1,6 @@
+@CoreFitness.API_HostAddress = http://localhost:5222
+
+GET {{CoreFitness.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

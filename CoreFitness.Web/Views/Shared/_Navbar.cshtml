@@ -1,6 +1,20 @@
-﻿namespace CoreFitness.Web.Views.Shared
-{
-    public class _Navbar
-    {
-    }
-}
+﻿<nav class="cf-navbar">
+    <div class="cf-nav-left">
+        <a asp-controller="Home" asp-action="Index">
+            <img src="~/images/corefitness-logo.png" class="cf-logo" />
+        </a>
+
+        <div class="cf-nav-links">
+            <a class="cf-nav-link" asp-controller="Home" asp-action="Index">Home</a>
+            <a class="cf-nav-link" asp-controller="Classes" asp-action="Index">Classes</a>
+            <a class="cf-nav-link" asp-controller="Booking" asp-action="MyBookings">My Bookings</a>
+            <a class="cf-nav-link" asp-controller="Membership" asp-action="Index">Membership</a>
+            <a class="cf-nav-link" asp-controller="Membership" asp-action="Costumer Service">Costumer Service</a>
+        </div>
+    </div>
+
+    <div class="cf-nav-right">
+        <a class="cf-btn-nav-primary" asp-controller="Account" asp-action="Login">Login</a>
+        <a class="cf-btn-nav-secondary" asp-controller="Account" asp-action="Register">Sign Up</a>
+    </div>
+</nav>

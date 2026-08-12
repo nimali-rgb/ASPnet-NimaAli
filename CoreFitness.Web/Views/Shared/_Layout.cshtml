@@ -1,51 +1,89 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CoreFitness.Web</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/CoreFitness.Web.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CoreFitness.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+﻿@{
+    Layout = "_HomeLayout";
+}
+
+<section class="hero">
+    <div class="hero-left">
+
+        <div class="hero-tag">
+            <span class="dot"></span>
+            Strong Body. Strong Mind.
+        </div>
+
+        <h2>Build Strength Boost Confidence Today!</h2>
+
+        <p class="hero-text">
+            Begin your fitness journey with expert trainers, modern equipment, and a supportive environment designed to help you build strength and confidence.
+        </p>
+
+        <ul class="hero-list">
+            <li>Transform your body with training</li>
+            <li>Build confidence through fitness</li>
+            <li>Personal training for real results</li>
+            <li>Fitness tailored to your goals</li>
+        </ul>
+
+        <a class="hero-btn" href="#">Get Started</a>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - CoreFitness.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+    <div class="hero-right">
+        <img src="/images/heroimgae.png" alt="Fitness Image" />
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="about-topbar">
+        <img src="/images/modernEquiment.png" alt="Modern Equipment Logos" class="about-topbar-img" />
+    </div>
+</section>
+
+<div class="about-content">
+    <div class="about-image-wrapper">
+        <img src="/images/heroSection2.png" class="about-single-img" alt="About Image" />
+    </div>
+
+    <div class="about-text">
+        <h3>About Us</h3>
+        <h2>Elevating Fitness Journey with Expert Guidance</h2>
+
+        <p>
+            We support every stage of your fitness journey with certified trainers, personalized programs,
+            and proven methods designed to help you train safely and build strength.
+        </p>
+
+        <p>
+            Our mission is to transform lives by combining expert guidance, powerful training programs,
+            and a motivating community that helps you grow stronger every day.
+        </p>
+    </div>
+</div>
+
+<section class="program-section">
+    <div class="program-header">
+        <p class="program-label">Our Programs</p>
+        <h2 class="program-title">Professional training program for stronger health</h2>
+    </div>
+
+    <div class="program-image-wrapper">
+        <img src="/images/section3.png" alt="Programs Image" class="program-full-img" />
+    </div>
+
+    <p class="program-footer">
+        Let’s make something great work together. <span>Get Free Quote.</span>
+    </p>
+</section>
+
+<section class="store-section">
+    <div class="store-header">
+        <p class="store-label">Our Store</p>
+        <h2 class="store-title">High quality fitness products built for results</h2>
+    </div>
+
+    <div class="store-image-wrapper">
+        <img src="/images/section4.png" alt="Store Image" class="store-full-img" />
+    </div>
+
+    <p class="store-footer">
+        Let’s make something great work together. <span>Get Free Quote.</span>
+    </p>
+</section>

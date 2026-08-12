@@ -1,31 +1,920 @@
+/* ============================
+   CoreFitness – Figma Colors (direkta färger)
+   ============================ */
 html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    font-size: clamp(14px, 1.2vw, 18px);
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: 'Inter', sans-serif;
+    background-color: #F7F7F7;
+    color: #080517;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+h1, h2, h3, h4 {
+    font-weight: 700;
+    color: #080517;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
 }
+
+h2 {
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+}
+
+h3 {
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+}
+
+h4 {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: 700;
+}
+
+p {
+    font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+    line-height: 1.7;
+}
+
+/* ============================
+   NAVBAR
+   ============================ */
+
+.cf-navbar {
+    height: 80px;
+    background: linear-gradient(90deg, #080517 0%, #131020 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+}
+
+.cf-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.cf-logo {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.cf-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.cf-nav-link {
+    font-weight: 500;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.2s;
+}
+
+    .cf-nav-link:hover {
+        color: #D6EB31;
+    }
+
+.cf-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cf-btn-nav-primary {
+    background: #D6EB31;
+    color: #000000;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.cf-btn-nav-secondary {
+    background: transparent;
+    color: #D6EB31;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #D6EB31;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+
+/* ============================
+   BUTTONS
+   ============================ */
+
+.cf-btn {
+    background: #D6EB31;
+    color: #000000;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-block;
+}
+
+    .cf-btn:hover {
+        background: #c4d82c;
+    }
+
+.cf-btn-outline {
+    background: transparent;
+    border: 2px solid #D6EB31;
+    color: #FFFFFF;
+}
+
+    .cf-btn-outline:hover {
+        background: #D6EB31;
+        color: #000000;
+    }
+
+/* ============================
+   FOOTER
+   ============================ */
+
+.cf-footer {
+    background: #FFFFFF;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+    .cf-footer p {
+        margin: 0;
+        color: #575757;
+    }
+
+/* ============================
+   HOME – HERO (pixel-perfect)
+   ============================ */
+
+.hero {
+    background: linear-gradient(90deg, #080517 0%, #131020 100%);
+    height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 80px;
+    color: #FFFFFF;
+}
+
+/* Vänster sida */
+.hero-left {
+    max-width: 520px;
+}
+
+    .hero-left h1 {
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+
+    .hero-left h2 {
+        font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+        font-weight: 600;
+        margin-bottom: 18px;
+        color: #FFFFFF;
+        opacity: 0.9;
+    }
+
+.hero-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    color: #E0E0E0;
+}
+
+/* Bullet-listan */
+.hero-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 32px;
+}
+
+    .hero-list li {
+        margin-bottom: 8px;
+        position: relative;
+        padding-left: 22px;
+        font-size: 1rem;
+    }
+
+        .hero-list li::before {
+            content: "•";
+            color: #D6EB31;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2rem;
+        }
+
+/* Knappen */
+.hero-btn {
+    display: inline-block;
+    background-color: #D6EB31;
+    color: #000000;
+    padding: 14px 36px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.05rem;
+    transition: 0.2s ease;
+}
+
+    .hero-btn:hover {
+        background-color: #c4d82c;
+    }
+
+/* Höger sida (bilden) */
+.hero-right img {
+    height: 520px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.4));
+}
+
+/* ============================
+   HERO – SMALL TAG TEXT
+   ============================ */
+
+.hero-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    opacity: 0.85;
+}
+
+    .hero-tag .dot {
+        width: 8px;
+        height: 8px;
+        background-color: #8CE85A; /* grön prick */
+        border-radius: 50%;
+    }
+
+.hero-tag {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+}
+
+
+/* ============================
+   ABOUT – SINGLE IMAGE LAYOUT
+   ============================ */
+
+.about-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 80px;
+    background-color: #FFFFFF;
+    gap: 60px;
+}
+
+/* Left side image */
+.about-image-wrapper {
+    width: 48%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-single-img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    object-fit: cover;
+}
+
+/* Right side text */
+.about-text {
+    width: 48%;
+}
+
+    .about-text h3 
+    {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #1A1A1A; /* mörk oval bakgrund */
+        color: #FFFFFF; /* vit text */
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 999px; /* gör den oval */
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+    }
+
+        /* Den lilla gröna pricken */
+        .about-text h3::before 
+        {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background-color: #D6EB31; /* samma gröna som du använder */
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+
+    .about-text h2 {
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #080517;
+    }
+
+    .about-text p {
+        color: #575757;
+        margin-bottom: 16px;
+        line-height: 1.7;
+    }
+
+/* ============================
+   HOME – PROGRAMS (single image)
+   ============================ */
+
+.program-section {
+    padding: 80px 0;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+
+.program-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1A1A1A;
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+    .program-label::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background-color: #D6EB31;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+
+.program-title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: #080517;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+}
+
+.program-image-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.program-full-img {
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.program-footer {
+    font-size: 1rem;
+    color: #575757;
+}
+
+    .program-footer span {
+        color: #D6EB31;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+
+/* ============================
+   HOME – STORE (single image)
+   ============================ */
+
+.store-section {
+    padding: 80px 0;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+
+
+.store-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1A1A1A;
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+    .store-label::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background-color: #D6EB31;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+.store-title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: #080517;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+}
+
+.store-image-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.store-full-img {
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.store-footer {
+    font-size: 1rem;
+    color: #575757;
+}
+
+    .store-footer span {
+        color: #D6EB31;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+
+    /*footer*/
+.home-footer {
+    background-color: #131020;
+    color: #FFFFFF;
+    padding: 90px 0 40px 0;
+}
+
+.home-footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    padding: 0 20px;
+}
+
+/* LEFT SIDE */
+.footer-left {
+    flex: 1;
+    max-width: 380px;
+}
+
+.home-footer-logo {
+    width: 150px;
+    margin-bottom: 25px;
+}
+
+.footer-left h3 {
+    color: #D6EB31;
+    margin-bottom: 10px;
+}
+
+.footer-left p {
+    color: #CCCCCC;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.footer-location-img {
+    width: 100%;
+    max-width: 260px;
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+/* RIGHT SIDE */
+.footer-right {
+    flex: 1.4;
+    max-width: 600px;
+}
+
+.home-footer-main-title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 40px;
+    color: #FFFFFF;
+}
+
+/* HOURS BLOCK */
+.footer-hours {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+    .footer-hours h3 {
+        color: #D6EB31;
+        margin-bottom: 10px;
+    }
+
+    .footer-hours p {
+        color: #CCCCCC;
+        line-height: 1.6;
+    }
+
+/* COPYRIGHT */
+.home-footer-copy {
+    text-align: center;
+    color: #888;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .home-footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-hours {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .home-footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-left,
+    .footer-right {
+        max-width: 100%;
+    }
+
+    .footer-hours {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-left p,
+    .footer-right p {
+        text-align: center;
+    }
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+
+@media (max-width: 900px) {
+    .home-footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-left,
+    .footer-right {
+        max-width: 100%;
+    }
+
+    .footer-hours {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-left p,
+    .footer-right p {
+        text-align: center;
+    }
+}
+
+
+ 
+    /* ============================
+   RESPONSIVE BREAKPOINTS
+   ============================ */
+    /* Tablet (max 900px) */
+    @media (max-width: 900px) {
+        .home-footer-columns {
+            gap: 30px;
+        }
+
+        .home-footer-col {
+            max-width: 220px;
+        }
+    }
+    /* Mobil (max 700px) */
+    @media (max-width: 700px) {
+        .home-footer-columns {
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .home-footer-col {
+            text-align: center;
+            max-width: 100%;
+        }
+
+        .home-footer h2 {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+        }
+    }
+    /* Extra liten mobil (max 400px) */
+    @media (max-width: 400px) {
+        .home-footer {
+            padding: 60px 0;
+        }
+
+        .home-footer-logo {
+            width: 60px;
+        }
+
+        .home-footer-columns {
+            gap: 30px;
+        }
+    }
+
+
+/* ============================
+   MEMBERSHIP HORIZONTAL LAYOUT
+   ============================ */
+/* Sektion */
+.membership-section {
+    padding: 60px 0;
+}
+
+/* Grid som på homepage */
+.membership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Kort */
+.membership-card {
+    background: #1A1A1A;
+    padding: 24px;
+    border-radius: 12px;
+    color: #fff;
+}
+
+    .membership-card h2 {
+        margin-bottom: 12px;
+    }
+
+    .membership-card ul {
+        padding-left: 20px;
+        margin-bottom: 16px;
+    }
+
+.price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #D6EB31;
+}
+
+.note {
+    color: #aaa;
+    margin-bottom: 12px;
+}
+
+.premium {
+    border: 2px solid #D6EB31;
+}
+
+/* Contact card bild */
+.contact-img {
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.btn-yellow {
+    display: inline-block;
+    background: #D6EB31;
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: 0.2s ease;
+}
+
+    .btn-yellow:hover {
+        background: #c2d82c;
+    }
+
+.membership-icons {
+    display: flex;
+    justify-content: center; /* CENTRERAR hela raden */
+    align-items: center;
+    gap: 60px; /* avstånd mellan items */
+    margin: 0 auto; /* extra säkerhet */
+    width: 100%;
+}
+
+.icon-item {
+    display: flex;
+    align-items: center; /* centrerar bild + text vertikalt */
+    gap: 20px;
+    color: #000000;
+    font-size: 1rem;
+}
+
+.icon-img {
+    width: 40px;
+    height: 20px;
+    object-fit: contain;
+}
+
+
+
+    /* ============================
+   MY BOOKINGS PAGE
+   ============================ */
+
+    .bookings-section {
+        padding: 80px 0;
+        text-align: center;
+    }
+
+    .booking-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 600px;
+        margin: 0 auto;
+    }
+
+    .booking-card {
+        background: #FFFFFF;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        text-align: left;
+    }
+
+        .booking-card.empty {
+            width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .booking-card h3 {
+            margin-top: 0;
+            color: #080517;
+        }
+
+        .booking-card p {
+            margin: 6px 0;
+            color: #27252F;
+        }
+
+    .booking-actions {
+        margin-top: 20px;
+        text-align: right;
+    }
+
+
+    .about-topbar {
+        background-color: #D6EB31;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .about-topbar-img {
+        width: 100%;
+        max-width: 1200px;
+        height: auto;
+        display: block;
+    }
+    /* ============================
+   HOME – GUIDANCE
+   ============================ */
+
+    .guidance-section {
+        padding: 72px 0;
+        text-align: center;
+    }
+
+        .guidance-section h2 {
+            margin-bottom: 12px;
+        }
+
+    .guidance-text {
+        color: #575757;
+        margin-bottom: 32px;
+    }
+
+    .guidance-grid {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+    }
+
+        .guidance-grid img {
+            width: 280px;
+            border-radius: 10px;
+        }
+    /* ============================
+   HOME – PROGRAMS
+   ============================ */
+
+    .program-section {
+        padding: 72px 0;
+        text-align: center;
+    }
+
+    .program-grid {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 24px;
+    }
+
+        .program-grid img {
+            width: 360px;
+            border-radius: 10px;
+        }
+    /* ============================
+   HOME – STORE
+   ============================ */
+
+    .store-section {
+        background-color: #F7F7F7;
+        padding: 72px 0;
+        text-align: center;
+    }
+
+    .store-grid {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-top: 28px;
+    }
+
+        .store-grid img {
+            width: 120px;
+        }

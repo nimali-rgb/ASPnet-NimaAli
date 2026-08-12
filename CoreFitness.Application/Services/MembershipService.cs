@@ -1,17 +1,30 @@
-﻿using CoreFitness.Application.DTOs;
-using CoreFitness.Application.Interfaces;
+﻿using CoreFitness.Application.Interfaces;
+using CoreFitness.Domain.Entities;
 
 namespace CoreFitness.Application.Services;
 
 public class MembershipService : IMembershipService
 {
-    public Task CreateMembershipAsync(MembershipCreateDto dto)
+    private readonly IMembershipRepository _membershipRepository;
+
+    public MembershipService(IMembershipRepository membershipRepository)
     {
-        throw new NotImplementedException();
+        _membershipRepository = membershipRepository;
     }
 
-    public Task<bool> UserHasMembershipAsync(string userId)
+    public async Task<Membership?> GetMembershipForUserAsync(string userId)
+        => await _membershipRepository.GetByUserIdAsync(userId);
+
+    public async Task CreateMembershipAsync(Membership membership)
+        => await _membershipRepository.AddAsync(membership);
+
+    public async Task UpdateMembershipAsync(Membership membership)
+        => await _membershipRepository.UpdateAsync(membership);
+
+    public async Task DeleteMembershipAsync(int id)
     {
-        throw new NotImplementedException();
+        var membership = await _membershipRepository.GetByIdAsync(id);
+        if (membership != null)
+            await _membershipRepository.DeleteAsync(membership);
     }
 }

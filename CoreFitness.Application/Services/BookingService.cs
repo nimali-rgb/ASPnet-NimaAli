@@ -1,17 +1,30 @@
-﻿using CoreFitness.Application.DTOs;
-using CoreFitness.Application.Interfaces;
+﻿using CoreFitness.Application.Interfaces;
+using CoreFitness.Domain.Entities;
 
 namespace CoreFitness.Application.Services;
 
 public class BookingService : IBookingService
 {
-    public Task<bool> CreateBookingAsync(BookingCreateDto dto)
+    private readonly IBookingRepository _bookingRepository;
+
+    public BookingService(IBookingRepository bookingRepository)
     {
-        throw new NotImplementedException();
+        _bookingRepository = bookingRepository;
     }
 
-    public Task<IEnumerable<BookingDto>> GetBookingsForUserAsync(string userId)
+    public async Task<IEnumerable<Booking>> GetBookingsForUserAsync(string userId)
+        => await _bookingRepository.GetByUserIdAsync(userId);
+
+    public async Task<Booking?> GetBookingByIdAsync(int id)
+        => await _bookingRepository.GetByIdAsync(id);
+
+    public async Task CreateBookingAsync(Booking booking)
+        => await _bookingRepository.AddAsync(booking);
+
+    public async Task DeleteBookingAsync(int id)
     {
-        throw new NotImplementedException();
+        var booking = await _bookingRepository.GetByIdAsync(id);
+        if (booking != null)
+            await _bookingRepository.DeleteAsync(booking);
     }
 }
