@@ -1,6 +1,17 @@
-﻿namespace CoreFitness.Web.Views.Account
+﻿@model CoreFitness.Domain.Entities.Membership
+@{
+    Layout = "_HomeLayout";
+}
+
+<h2>My Membership</h2>
+
+@if (Model == null)
 {
-    public class MyMembership
-    {
-    }
+    <p>You do not have a membership yet.</p>
+}
+else
+{
+    <p>Type: @Model.Type</p>
+    <p>Price: @Model.Price</p>
+    <p>Created: @Model.CreatedAt</p>
 }

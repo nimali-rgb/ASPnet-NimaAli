@@ -8,5 +8,4 @@ public class Membership
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public string UserId { get; set; } = string.Empty;
-    public ApplicationUser User { get; set; } = null!;
 }

@@ -9,6 +9,5 @@ public class GymClass
     public string? Instructor { get; set; }
     public string? Category { get; set; }
 
-    // Navigation
     public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 }

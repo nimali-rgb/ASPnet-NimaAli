@@ -1,8 +1,6 @@
 ﻿using CoreFitness.Application.Interfaces;
 using CoreFitness.Domain.Entities;
 
-namespace CoreFitness.Application.Services;
-
 public class BookingService : IBookingService
 {
     private readonly IBookingRepository _bookingRepository;
@@ -26,5 +24,24 @@ public class BookingService : IBookingService
         var booking = await _bookingRepository.GetByIdAsync(id);
         if (booking != null)
             await _bookingRepository.DeleteAsync(booking);
+    }
+
+    // NY METOD
+    public async Task<bool> BookAsync(string userId, int gymClassId)
+    {
+        var bookings = await _bookingRepository.GetByUserIdAsync(userId);
+
+        if (bookings.Any(b => b.GymClassId == gymClassId))
+            return false;
+
+        var booking = new Booking
+        {
+            UserId = userId,
+            GymClassId = gymClassId,
+            CreatedAt = DateTime.Now
+        };
+
+        await _bookingRepository.AddAsync(booking);
+        return true;
     }
 }

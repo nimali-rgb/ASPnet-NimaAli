@@ -3,5 +3,6 @@
   <Project Path="CoreFitness.Application/CoreFitness.Application.csproj" />
   <Project Path="CoreFitness.Domain/CoreFitness.Domain.csproj" />
   <Project Path="CoreFitness.Infrastructure/CoreFitness.Infrastructure.csproj" />
+  <Project Path="CoreFitness.Tests/CoreFitness.Tests.csproj" Id="4f9e6910-7aa3-4e17-992b-bc7e1591c997" />
   <Project Path="CoreFitness.Web/CoreFitness.Web.csproj" />
 </Solution>

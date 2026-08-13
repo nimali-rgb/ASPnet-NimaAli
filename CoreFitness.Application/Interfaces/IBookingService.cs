@@ -8,4 +8,7 @@ public interface IBookingService
     Task<Booking?> GetBookingByIdAsync(int id);
     Task CreateBookingAsync(Booking booking);
     Task DeleteBookingAsync(int id);
+
+    Task<bool> BookAsync(string userId, int gymClassId);
+
 }

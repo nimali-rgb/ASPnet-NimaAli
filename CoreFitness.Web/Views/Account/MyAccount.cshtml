@@ -1,0 +1,12 @@
+﻿@model IdentityUser
+@{
+    Layout = "_HomeLayout";
+}
+
+<h2>My Account</h2>
+
+<p>Email: @Model.Email</p>
+
+<form asp-action="DeleteAccount" method="post">
+    <button type="submit" class="btn-yellow">Delete My Account</button>
+</form>

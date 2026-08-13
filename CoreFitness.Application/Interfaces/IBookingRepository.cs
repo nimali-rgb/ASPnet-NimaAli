@@ -1,6 +1,4 @@
-﻿
-
-using CoreFitness.Domain.Entities;
+﻿using CoreFitness.Domain.Entities;
 
 namespace CoreFitness.Application.Interfaces;
 
