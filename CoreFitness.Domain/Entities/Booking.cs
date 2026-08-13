@@ -9,5 +9,5 @@ public class Booking
     public int GymClassId { get; set; }
     public GymClass GymClass { get; set; } = null!;
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime Date { get; set; }
 }

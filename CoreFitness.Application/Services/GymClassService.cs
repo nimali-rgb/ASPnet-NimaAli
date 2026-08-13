@@ -1,33 +1,21 @@
 ﻿using CoreFitness.Application.Interfaces;
 using CoreFitness.Domain.Entities;
 
-namespace CoreFitness.Application.Services;
-
-public class GymClassService : IGymClassService
+namespace CoreFitness.Application.Services
 {
-    private readonly IGymClassRepository _gymClassRepository;
-
-    public GymClassService(IGymClassRepository gymClassRepository)
+    public class GymClassService
     {
-        _gymClassRepository = gymClassRepository;
-    }
+        private readonly IGymClassRepository _repo;
 
-    public async Task<IEnumerable<GymClass>> GetAllClassesAsync()
-        => await _gymClassRepository.GetAllAsync();
+        public GymClassService(IGymClassRepository repo)
+        {
+            _repo = repo;
+        }
 
-    public async Task<GymClass?> GetClassByIdAsync(int id)
-        => await _gymClassRepository.GetByIdAsync(id);
-
-    public async Task CreateClassAsync(GymClass gymClass)
-        => await _gymClassRepository.AddAsync(gymClass);
-
-    public async Task UpdateClassAsync(GymClass gymClass)
-        => await _gymClassRepository.UpdateAsync(gymClass);
-
-    public async Task DeleteClassAsync(int id)
-    {
-        var gymClass = await _gymClassRepository.GetByIdAsync(id);
-        if (gymClass != null)
-            await _gymClassRepository.DeleteAsync(gymClass);
+        public Task<IEnumerable<GymClass>> GetAllAsync() => _repo.GetAllAsync();
+        public Task<GymClass?> GetByIdAsync(int id) => _repo.GetByIdAsync(id);
+        public Task AddAsync(GymClass gymClass) => _repo.AddAsync(gymClass);
+        public Task UpdateAsync(GymClass gymClass) => _repo.UpdateAsync(gymClass);
+        public Task DeleteAsync(int id) => _repo.DeleteAsync(id);
     }
 }

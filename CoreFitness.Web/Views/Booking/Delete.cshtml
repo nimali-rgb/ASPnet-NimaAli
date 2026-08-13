@@ -1,0 +1,9 @@
+﻿@model CoreFitness.Domain.Entities.Booking
+
+<h2>Delete Booking</h2>
+
+<p>Are you sure you want to delete booking for user @Model.UserId?</p>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <button type="submit" class="btn-yellow">Delete</button>
+</form>

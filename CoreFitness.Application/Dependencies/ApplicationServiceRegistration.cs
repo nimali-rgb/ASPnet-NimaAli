@@ -8,9 +8,10 @@ public static class ApplicationServiceRegistration
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddScoped<IMembershipService, MembershipService>();
-        services.AddScoped<IGymClassService, GymClassService>();
-        services.AddScoped<IBookingService, BookingService>();
+        services.AddScoped<MembershipService>();
+        services.AddScoped<GymClassService>();
+        services.AddScoped<BookingService>();
+        services.AddScoped<TeacherService>();
 
         return services;
     }

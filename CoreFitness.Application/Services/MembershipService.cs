@@ -1,30 +1,21 @@
 ﻿using CoreFitness.Application.Interfaces;
 using CoreFitness.Domain.Entities;
 
-namespace CoreFitness.Application.Services;
-
-public class MembershipService : IMembershipService
+namespace CoreFitness.Application.Services
 {
-    private readonly IMembershipRepository _membershipRepository;
-
-    public MembershipService(IMembershipRepository membershipRepository)
+    public class MembershipService
     {
-        _membershipRepository = membershipRepository;
-    }
+        private readonly IMembershipRepository _repo;
 
-    public async Task<Membership?> GetMembershipForUserAsync(string userId)
-        => await _membershipRepository.GetByUserIdAsync(userId);
+        public MembershipService(IMembershipRepository repo)
+        {
+            _repo = repo;
+        }
 
-    public async Task CreateMembershipAsync(Membership membership)
-        => await _membershipRepository.AddAsync(membership);
-
-    public async Task UpdateMembershipAsync(Membership membership)
-        => await _membershipRepository.UpdateAsync(membership);
-
-    public async Task DeleteMembershipAsync(int id)
-    {
-        var membership = await _membershipRepository.GetByIdAsync(id);
-        if (membership != null)
-            await _membershipRepository.DeleteAsync(membership);
+        public Task<IEnumerable<Membership>> GetAllAsync() => _repo.GetAllAsync();
+        public Task<Membership?> GetByIdAsync(int id) => _repo.GetByIdAsync(id);
+        public Task AddAsync(Membership membership) => _repo.AddAsync(membership);
+        public Task UpdateAsync(Membership membership) => _repo.UpdateAsync(membership);
+        public Task DeleteAsync(int id) => _repo.DeleteAsync(id);
     }
 }

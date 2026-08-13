@@ -3,34 +3,47 @@ using CoreFitness.Domain.Entities;
 using CoreFitness.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoreFitness.Infrastructure.Repositories;
-
-public class BookingRepository : IBookingRepository
+namespace CoreFitness.Infrastructure.Repositories
 {
-    private readonly CoreFitnessDbContext _context;
-
-    public BookingRepository(CoreFitnessDbContext context)
+    public class BookingRepository : IBookingRepository
     {
-        _context = context;
-    }
+        private readonly CoreFitnessDbContext _context;
 
-    public async Task<IEnumerable<Booking>> GetByUserIdAsync(string userId)
-        => await _context.Bookings
-            .Where(b => b.UserId == userId)
-            .ToListAsync();
+        public BookingRepository(CoreFitnessDbContext context)
+        {
+            _context = context;
+        }
 
-    public async Task<Booking?> GetByIdAsync(int id)
-        => await _context.Bookings.FindAsync(id);
+        public async Task<IEnumerable<Booking>> GetAllAsync()
+        {
+            return await _context.Bookings.ToListAsync();
+        }
 
-    public async Task AddAsync(Booking booking)
-    {
-        _context.Bookings.Add(booking);
-        await _context.SaveChangesAsync();
-    }
+        public async Task<Booking?> GetByIdAsync(int id)
+        {
+            return await _context.Bookings.FindAsync(id);
+        }
 
-    public async Task DeleteAsync(Booking booking)
-    {
-        _context.Bookings.Remove(booking);
-        await _context.SaveChangesAsync();
+        public async Task AddAsync(Booking booking)
+        {
+            _context.Bookings.Add(booking);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(Booking booking)
+        {
+            _context.Bookings.Update(booking);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var booking = await _context.Bookings.FindAsync(id);
+            if (booking != null)
+            {
+                _context.Bookings.Remove(booking);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

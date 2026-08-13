@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CoreFitness.Domain.Entities.Booking>
+
+<h2>Bookings</h2>
+
+<a asp-action="Create" class="btn-yellow">Add Booking</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Class</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td>@b.UserId</td>
+                <td>@b.GymClassId</td>
+                <td>@b.Date</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@b.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@b.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@b.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

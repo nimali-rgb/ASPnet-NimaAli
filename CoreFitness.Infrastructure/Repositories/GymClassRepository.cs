@@ -3,38 +3,47 @@ using CoreFitness.Domain.Entities;
 using CoreFitness.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoreFitness.Infrastructure.Repositories;
-
-public class GymClassRepository : IGymClassRepository
+namespace CoreFitness.Infrastructure.Repositories
 {
-    private readonly CoreFitnessDbContext _context;
-
-    public GymClassRepository(CoreFitnessDbContext context)
+    public class GymClassRepository : IGymClassRepository
     {
-        _context = context;
-    }
+        private readonly CoreFitnessDbContext _context;
 
-    public async Task<IEnumerable<GymClass>> GetAllAsync()
-        => await _context.GymClasses.ToListAsync();
+        public GymClassRepository(CoreFitnessDbContext context)
+        {
+            _context = context;
+        }
 
-    public async Task<GymClass?> GetByIdAsync(int id)
-        => await _context.GymClasses.FindAsync(id);
+        public async Task<IEnumerable<GymClass>> GetAllAsync()
+        {
+            return await _context.GymClasses.ToListAsync();
+        }
 
-    public async Task AddAsync(GymClass gymClass)
-    {
-        _context.GymClasses.Add(gymClass);
-        await _context.SaveChangesAsync();
-    }
+        public async Task<GymClass?> GetByIdAsync(int id)
+        {
+            return await _context.GymClasses.FindAsync(id);
+        }
 
-    public async Task UpdateAsync(GymClass gymClass)
-    {
-        _context.GymClasses.Update(gymClass);
-        await _context.SaveChangesAsync();
-    }
+        public async Task AddAsync(GymClass gymClass)
+        {
+            _context.GymClasses.Add(gymClass);
+            await _context.SaveChangesAsync();
+        }
 
-    public async Task DeleteAsync(GymClass gymClass)
-    {
-        _context.GymClasses.Remove(gymClass);
-        await _context.SaveChangesAsync();
+        public async Task UpdateAsync(GymClass gymClass)
+        {
+            _context.GymClasses.Update(gymClass);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var gymClass = await _context.GymClasses.FindAsync(id);
+            if (gymClass != null)
+            {
+                _context.GymClasses.Remove(gymClass);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

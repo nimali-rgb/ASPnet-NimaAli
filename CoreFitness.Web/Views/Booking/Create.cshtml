@@ -1,0 +1,10 @@
+﻿@model CoreFitness.Domain.Entities.Booking
+
+<h2>Add Booking</h2>
+
+<form asp-action="Create" method="post">
+    <input asp-for="UserId" placeholder="User ID" />
+    <input asp-for="GymClassId" placeholder="Class ID" />
+    <input asp-for="Date" type="datetime-local" />
+    <button type="submit" class="btn-yellow">Save</button>
+</form>

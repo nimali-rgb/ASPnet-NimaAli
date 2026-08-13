@@ -1,14 +1,13 @@
-﻿
+﻿using CoreFitness.Domain.Entities;
 
-using CoreFitness.Domain.Entities;
-
-namespace CoreFitness.Application.Interfaces;
-
-public interface IGymClassRepository
+namespace CoreFitness.Application.Interfaces
 {
-    Task<IEnumerable<GymClass>> GetAllAsync();
-    Task<GymClass?> GetByIdAsync(int id);
-    Task AddAsync(GymClass gymClass);
-    Task UpdateAsync(GymClass gymClass);
-    Task DeleteAsync(GymClass gymClass);
+    public interface IGymClassRepository
+    {
+        Task<IEnumerable<GymClass>> GetAllAsync();
+        Task<GymClass?> GetByIdAsync(int id);
+        Task AddAsync(GymClass gymClass);
+        Task UpdateAsync(GymClass gymClass);
+        Task DeleteAsync(int id);
+    }
 }

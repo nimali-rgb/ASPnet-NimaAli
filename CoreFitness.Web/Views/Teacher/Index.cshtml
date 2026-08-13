@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CoreFitness.Domain.Entities.Teacher>
+
+<h2>Teachers</h2>
+
+<a asp-action="Create" class="btn-yellow">Add Teacher</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model)
+        {
+            <tr>
+                <td>@t.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@t.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@t.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@t.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

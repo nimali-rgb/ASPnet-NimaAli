@@ -2,14 +2,14 @@
 
 <h2>Gym Classes</h2>
 
+<a asp-action="Create" class="btn-yellow">Add Class</a>
+
 <table class="table">
     <thead>
         <tr>
             <th>Name</th>
-            <th>Instructor</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Category</th>
+            <th>Capacity</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -17,10 +17,12 @@
         {
             <tr>
                 <td>@c.Name</td>
-                <td>@c.Instructor</td>
-                <td>@c.Date.ToShortDateString()</td>
-                <td>@c.Time</td>
-                <td>@c.Category</td>
+                <td>@c.Capacity</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@c.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@c.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@c.Id">Delete</a>
+                </td>
             </tr>
         }
     </tbody>

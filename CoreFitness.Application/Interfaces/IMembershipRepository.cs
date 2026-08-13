@@ -1,14 +1,13 @@
-﻿
+﻿using CoreFitness.Domain.Entities;
 
-using CoreFitness.Domain.Entities;
-
-namespace CoreFitness.Application.Interfaces;
-
-public interface IMembershipRepository
+namespace CoreFitness.Application.Interfaces
 {
-    Task<Membership?> GetByUserIdAsync(string userId);
-    Task<Membership?> GetByIdAsync(int id);
-    Task AddAsync(Membership membership);
-    Task UpdateAsync(Membership membership);
-    Task DeleteAsync(Membership membership);
+    public interface IMembershipRepository
+    {
+        Task<IEnumerable<Membership>> GetAllAsync();
+        Task<Membership?> GetByIdAsync(int id);
+        Task AddAsync(Membership membership);
+        Task UpdateAsync(Membership membership);
+        Task DeleteAsync(int id);
+    }
 }

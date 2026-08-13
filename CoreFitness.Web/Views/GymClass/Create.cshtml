@@ -1,0 +1,9 @@
+﻿@model CoreFitness.Domain.Entities.GymClass
+
+<h2>Add Gym Class</h2>
+
+<form asp-action="Create" method="post">
+    <input asp-for="Name" placeholder="Name" />
+    <input asp-for="Capacity" placeholder="Capacity" />
+    <button type="submit" class="btn-yellow">Save</button>
+</form>

@@ -4,19 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreFitness.Web.Controllers
 {
-    public class MembershipController : Controller
+    public class TeacherController : Controller
     {
-        private readonly MembershipService _service;
+        private readonly TeacherService _service;
 
-        public MembershipController(MembershipService service)
+        public TeacherController(TeacherService service)
         {
             _service = service;
         }
 
         public async Task<IActionResult> Index()
         {
-            var memberships = await _service.GetAllAsync();
-            return View(memberships);
+            var teachers = await _service.GetAllAsync();
+            return View(teachers);
         }
 
         public IActionResult Create()
@@ -25,39 +25,39 @@ namespace CoreFitness.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Membership membership)
+        public async Task<IActionResult> Create(Teacher teacher)
         {
             if (!ModelState.IsValid)
-                return View(membership);
+                return View(teacher);
 
-            await _service.AddAsync(membership);
+            await _service.AddAsync(teacher);
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var membership = await _service.GetByIdAsync(id);
-            if (membership == null) return NotFound();
+            var teacher = await _service.GetByIdAsync(id);
+            if (teacher == null) return NotFound();
 
-            return View(membership);
+            return View(teacher);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Membership membership)
+        public async Task<IActionResult> Edit(Teacher teacher)
         {
             if (!ModelState.IsValid)
-                return View(membership);
+                return View(teacher);
 
-            await _service.UpdateAsync(membership);
+            await _service.UpdateAsync(teacher);
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var membership = await _service.GetByIdAsync(id);
-            if (membership == null) return NotFound();
+            var teacher = await _service.GetByIdAsync(id);
+            if (teacher == null) return NotFound();
 
-            return View(membership);
+            return View(teacher);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -69,10 +69,10 @@ namespace CoreFitness.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var membership = await _service.GetByIdAsync(id);
-            if (membership == null) return NotFound();
+            var teacher = await _service.GetByIdAsync(id);
+            if (teacher == null) return NotFound();
 
-            return View(membership);
+            return View(teacher);
         }
     }
 }
