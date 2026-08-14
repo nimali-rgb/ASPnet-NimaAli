@@ -1,0 +1,111 @@
+﻿@model CoreFitness.Web.Models.MyPageViewModel
+
+<div class="container mt-4">
+
+    <h2 class="mb-3">Min sida</h2>
+    <hr />
+
+    <!-- PROFILSEKTION -->
+    <div class="card mb-4 p-3 shadow-sm">
+        <div class="row align-items-center">
+
+            <!-- Profilbild -->
+            <div class="col-md-3 text-center">
+                <img src="@Model.ProfileImageUrl"
+                     alt="Profilbild"
+                     class="img-fluid rounded-circle mb-3"
+                     style="width:150px; height:150px; object-fit:cover;">
+
+                <a asp-controller="Account"
+                   asp-action="UploadProfileImage"
+                   class="btn btn-outline-primary btn-sm w-100">
+                    Byt profilbild
+                </a>
+            </div>
+
+            <!-- Profilinfo -->
+            <div class="col-md-9">
+                <h4>@Model.FullName</h4>
+
+                <p class="mb-1">
+                    <strong>Email:</strong> @Model.Email
+                </p>
+
+                <p class="mb-1">
+                    <strong>Telefon:</strong> @Model.PhoneNumber
+                </p>
+
+                <p class="mb-3">
+                    <strong>Medlem sedan:</strong> @Model.MemberSince?.ToShortDateString() ?? "Ej medlem"
+                </p>
+
+                <a asp-controller="Account"
+                   asp-action="Manage"
+                   class="btn btn-primary">
+                    Redigera profil
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- MEDLEMSKAP -->
+    <h3>Mitt medlemskap</h3>
+
+    @if (Model.HasMembership)
+    {
+        <div class="card p-3 mb-4 shadow-sm">
+            <p><strong>Typ:</strong> @Model.Membership.Type</p>
+            <p><strong>Pris:</strong> @Model.Membership.Price kr</p>
+            <p><strong>Startdatum:</strong> @Model.Membership.CreatedAt.ToShortDateString()</p>
+            <p><strong>Status:</strong> Aktiv</p>
+        </div>
+    }
+    else
+    {
+        <p>Du har inget medlemskap ännu.</p>
+        <a class="btn btn-primary" href="/Membership/Create">Skapa medlemskap</a>
+    }
+
+    <hr />
+
+    <!-- BOKNINGAR -->
+    <h3>Mina bokade pass</h3>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    @if (Model.Bookings.Any())
+    {
+        <div class="row">
+            @foreach (var b in Model.Bookings)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">@b.GymClass.Name</h4>
+                            <p><strong>Datum:</strong> @b.GymClass.Date.ToShortDateString()</p>
+                            <p><strong>Tid:</strong> @b.GymClass.Time.ToString(@"hh\:mm")</p>
+
+                            <a asp-controller="Booking"
+                               asp-action="Cancel"
+                               asp-route-id="@b.Id"
+                               class="btn btn-danger w-100">
+                                Avboka
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>Du har inga bokade pass.</p>
+        <a class="btn btn-primary" href="/GymClass">Boka pass</a>
+    }
+
+</div>

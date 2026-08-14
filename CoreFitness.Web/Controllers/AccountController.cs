@@ -1,19 +1,30 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using CoreFitness.Web.Areas.Identity.Data;
 using CoreFitness.Web.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Linq;
+
 
 namespace CoreFitness.Web.Controllers;
 
 public class AccountController : Controller
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<ApplicationUser> _userManager;      
+    private readonly SignInManager<ApplicationUser> _signInManager;  
 
-    public AccountController(UserManager<IdentityUser> userManager,
-                             SignInManager<IdentityUser> signInManager)
+    public AccountController(UserManager<ApplicationUser> userManager,
+                             SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+    }
+    public IActionResult Index()
+    {
+        return View();
     }
 
     // REGISTER GET
@@ -30,14 +41,13 @@ public class AccountController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
-        // Null-säkerhet
         if (model.Email is null || model.Password is null)
         {
             ModelState.AddModelError("", "Email och lösenord krävs.");
             return View(model);
         }
 
-        var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+        var user = new ApplicationUser { UserName = model.Email, Email = model.Email }; 
         var result = await _userManager.CreateAsync(user, model.Password);
 
         if (result.Succeeded)
@@ -66,7 +76,6 @@ public class AccountController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
-        // Null-säkerhet
         if (model.Email is null || model.Password is null)
         {
             ModelState.AddModelError("", "Email och lösenord krävs.");
@@ -108,7 +117,6 @@ public class AccountController : Controller
     {
         var user = await _userManager.GetUserAsync(User);
 
-        // Null-säkerhet
         if (user is null)
             return NotFound();
 
@@ -117,4 +125,61 @@ public class AccountController : Controller
 
         return RedirectToAction("Index", "Home");
     }
+
+    // UPLOAD PROFILE IMAGE
+    [Authorize]
+    [HttpGet]
+    public IActionResult UploadProfileImage()
+    {
+        return View();
+    }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> UploadProfileImage(IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+        {
+            TempData["Error"] = "Ingen bild vald.";
+            return RedirectToAction("UploadProfileImage");
+        }
+
+        // Tillåtna filtyper
+        var allowed = new[] { ".jpg", ".jpeg", ".png" };
+        var ext = Path.GetExtension(file.FileName).ToLower();
+
+        if (!allowed.Contains(ext))
+        {
+            TempData["Error"] = "Endast JPG och PNG är tillåtna.";
+            return RedirectToAction("UploadProfileImage");
+        }
+
+        // Hämta användare
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user == null)
+        {
+            TempData["Error"] = "Kunde inte hitta användaren.";
+            return RedirectToAction("Index", "MyPage");
+        }
+
+        // Skapa filnamn
+        var fileName = $"{userId}{ext}";
+        var savePath = Path.Combine("wwwroot/images/profile", fileName);
+
+        // Spara filen
+        using (var stream = new FileStream(savePath, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        // Uppdatera användaren
+        user.ProfileImageUrl = $"/images/profile/{fileName}";
+        await _userManager.UpdateAsync(user);
+
+        TempData["Success"] = "Profilbild uppdaterad!";
+        return RedirectToAction("Index", "MyPage");
+    }
+
 }

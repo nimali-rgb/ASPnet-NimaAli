@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CoreFitness.Domain.Entities.Booking>
+
+<div class="container mt-4">
+    <h2>Mina bokningar</h2>
+    <hr />
+
+    @if (!Model.Any())
+    {
+        <p>Du har inga bokningar ännu.</p>
+        <a class="btn btn-primary" href="/GymClass">Boka pass</a>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var b in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">@b.GymClass.Name</h4>
+                            <p><strong>Datum:</strong> @b.GymClass.Date.ToShortDateString()</p>
+                            <p><strong>Tid:</strong> @b.GymClass.Time.ToString(@"hh\:mm")</p>
+
+                            <a asp-controller="Booking"
+                               asp-action="Cancel"
+                               asp-route-id="@b.Id"
+                               class="btn btn-danger w-100">
+                                Avboka
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,89 +1,22 @@
-﻿@{
-    Layout = "_HomeLayout";
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CoreFitness</title>
 
-<section class="hero">
-    <div class="hero-left">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
 
-        <div class="hero-tag">
-            <span class="dot"></span>
-            Strong Body. Strong Mind.
-        </div>
+<body>
 
-        <h2>Build Strength Boost Confidence Today!</h2>
+    @await Html.PartialAsync("_Navbar")
 
-        <p class="hero-text">
-            Begin your fitness journey with expert trainers, modern equipment, and a supportive environment designed to help you build strength and confidence.
-        </p>
+    <main>
+        @RenderBody()
+    </main>
+    @RenderSection("Scripts", required: false)
+    @await Html.PartialAsync("_Footer")
 
-        <ul class="hero-list">
-            <li>Transform your body with training</li>
-            <li>Build confidence through fitness</li>
-            <li>Personal training for real results</li>
-            <li>Fitness tailored to your goals</li>
-        </ul>
-
-        <a class="hero-btn" href="#">Get Started</a>
-    </div>
-
-    <div class="hero-right">
-        <img src="/images/heroimgae.png" alt="Fitness Image" />
-    </div>
-</section>
-
-<section class="about-section">
-    <div class="about-topbar">
-        <img src="/images/modernEquiment.png" alt="Modern Equipment Logos" class="about-topbar-img" />
-    </div>
-</section>
-
-<div class="about-content">
-    <div class="about-image-wrapper">
-        <img src="/images/heroSection2.png" class="about-single-img" alt="About Image" />
-    </div>
-
-    <div class="about-text">
-        <h3>About Us</h3>
-        <h2>Elevating Fitness Journey with Expert Guidance</h2>
-
-        <p>
-            We support every stage of your fitness journey with certified trainers, personalized programs,
-            and proven methods designed to help you train safely and build strength.
-        </p>
-
-        <p>
-            Our mission is to transform lives by combining expert guidance, powerful training programs,
-            and a motivating community that helps you grow stronger every day.
-        </p>
-    </div>
-</div>
-
-<section class="program-section">
-    <div class="program-header">
-        <p class="program-label">Our Programs</p>
-        <h2 class="program-title">Professional training program for stronger health</h2>
-    </div>
-
-    <div class="program-image-wrapper">
-        <img src="/images/section3.png" alt="Programs Image" class="program-full-img" />
-    </div>
-
-    <p class="program-footer">
-        Let’s make something great work together. <span>Get Free Quote.</span>
-    </p>
-</section>
-
-<section class="store-section">
-    <div class="store-header">
-        <p class="store-label">Our Store</p>
-        <h2 class="store-title">High quality fitness products built for results</h2>
-    </div>
-
-    <div class="store-image-wrapper">
-        <img src="/images/section4.png" alt="Store Image" class="store-full-img" />
-    </div>
-
-    <p class="store-footer">
-        Let’s make something great work together. <span>Get Free Quote.</span>
-    </p>
-</section>
+</body>
+</html>

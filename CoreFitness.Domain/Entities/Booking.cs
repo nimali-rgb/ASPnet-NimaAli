@@ -1,13 +1,14 @@
-﻿namespace CoreFitness.Domain.Entities;
-
-public class Booking
+﻿namespace CoreFitness.Domain.Entities
 {
-    public int Id { get; set; }
+    public class Booking
+    {
+        public int Id { get; set; }
 
-    public string UserId { get; set; } = string.Empty;
+        public string UserId { get; set; } = string.Empty;
 
-    public int GymClassId { get; set; }
-    public GymClass GymClass { get; set; } = null!;
+        public int GymClassId { get; set; }
+        public GymClass GymClass { get; set; } = null!;
 
-    public DateTime Date { get; set; }
+        public DateTime Date { get; set; }
+    }
 }

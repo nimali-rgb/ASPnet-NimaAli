@@ -4,10 +4,7 @@ namespace CoreFitness.Application.Interfaces
 {
     public interface IMembershipRepository
     {
-        Task<IEnumerable<Membership>> GetAllAsync();
-        Task<Membership?> GetByIdAsync(int id);
+        Task<Membership?> GetMembershipByUserIdAsync(string userId);
         Task AddAsync(Membership membership);
-        Task UpdateAsync(Membership membership);
-        Task DeleteAsync(int id);
     }
 }

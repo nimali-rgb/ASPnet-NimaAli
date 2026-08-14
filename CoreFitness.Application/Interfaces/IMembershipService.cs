@@ -1,11 +1,10 @@
 ﻿using CoreFitness.Domain.Entities;
 
-namespace CoreFitness.Application.Interfaces;
-
-public interface IMembershipService
+namespace CoreFitness.Application.Interfaces
 {
-    Task<Membership?> GetMembershipForUserAsync(string userId);
-    Task CreateMembershipAsync(Membership membership);
-    Task UpdateMembershipAsync(Membership membership);
-    Task DeleteMembershipAsync(int id);
+    public interface IMembershipService
+    {
+        Task<Membership?> GetMembershipByUserIdAsync(string userId);
+        Task CreateMembershipAsync(Membership membership);
+    }
 }

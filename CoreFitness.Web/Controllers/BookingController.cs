@@ -1,78 +1,71 @@
-﻿using CoreFitness.Application.Services;
-using CoreFitness.Domain.Entities;
+﻿using CoreFitness.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CoreFitness.Web.Controllers
 {
+    [Authorize]
     public class BookingController : Controller
     {
-        private readonly BookingService _service;
+        private readonly IBookingService _bookingService;
 
-        public BookingController(BookingService service)
+        public BookingController(IBookingService bookingService)
         {
-            _service = service;
+            _bookingService = bookingService;
         }
 
+        // ⭐ Boka pass
+        public async Task<IActionResult> Create(int gymClassId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+            var bookings = await _bookingService.GetBookingsByUserIdAsync(userId);
+
+            // Förhindra dubbelbokning
+            if (bookings.Any(b => b.GymClassId == gymClassId))
+            {
+                TempData["Error"] = "Du har redan bokat detta pass.";
+                return RedirectToAction("Index", "GymClass");
+            }
+
+            var success = await _bookingService.BookAsync(userId, gymClassId);
+
+            if (!success)
+            {
+                TempData["Error"] = "Du har redan bokat detta pass.";
+                return RedirectToAction("Index", "GymClass");
+            }
+
+            TempData["Success"] = "Du har bokat passet!";
+            return RedirectToAction("MyBookings");
+        }
+
+        // ⭐ Avboka pass
+        public async Task<IActionResult> Cancel(int id)
+        {
+            await _bookingService.CancelAsync(id);
+
+            TempData["Success"] = "Du har avbokat passet.";
+            return RedirectToAction("MyBookings");
+        }
+
+        // ⭐ Visa alla bokningar (Booking/Index)
         public async Task<IActionResult> Index()
         {
-            var bookings = await _service.GetAllAsync();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+            var bookings = await _bookingService.GetBookingsByUserIdAsync(userId);
+
             return View(bookings);
         }
 
-        public IActionResult Create()
+        // ⭐ MyBookings (huvudsidan för bokningar)
+        public async Task<IActionResult> MyBookings()
         {
-            return View();
-        }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+            var bookings = await _bookingService.GetBookingsByUserIdAsync(userId);
 
-        [HttpPost]
-        public async Task<IActionResult> Create(Booking booking)
-        {
-            if (!ModelState.IsValid)
-                return View(booking);
-
-            await _service.AddAsync(booking);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Edit(int id)
-        {
-            var booking = await _service.GetByIdAsync(id);
-            if (booking == null) return NotFound();
-
-            return View(booking);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(Booking booking)
-        {
-            if (!ModelState.IsValid)
-                return View(booking);
-
-            await _service.UpdateAsync(booking);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Delete(int id)
-        {
-            var booking = await _service.GetByIdAsync(id);
-            if (booking == null) return NotFound();
-
-            return View(booking);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            await _service.DeleteAsync(id);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var booking = await _service.GetByIdAsync(id);
-            if (booking == null) return NotFound();
-
-            return View(booking);
+            return View(bookings);
         }
     }
 }

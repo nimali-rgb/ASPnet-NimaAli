@@ -3,7 +3,7 @@ using CoreFitness.Domain.Entities;
 
 namespace CoreFitness.Application.Services
 {
-    public class BookingService
+    public class BookingService : IBookingService
     {
         private readonly IBookingRepository _repo;
 
@@ -12,16 +12,28 @@ namespace CoreFitness.Application.Services
             _repo = repo;
         }
 
-        public Task<IEnumerable<Booking>> GetAllAsync() => _repo.GetAllAsync();
-        public Task<Booking?> GetByIdAsync(int id) => _repo.GetByIdAsync(id);
-        public Task AddAsync(Booking booking) => _repo.AddAsync(booking);
-        public Task UpdateAsync(Booking booking) => _repo.UpdateAsync(booking);
-        public Task DeleteAsync(int id) => _repo.DeleteAsync(id);
-
-        public async Task BookAsync(Booking booking)
+        public async Task<bool> BookAsync(string userId, int gymClassId)
         {
+            if (await _repo.IsAlreadyBookedAsync(userId, gymClassId))
+                return false;
+
+            var booking = new Booking
+            {
+                UserId = userId,
+                GymClassId = gymClassId,
+                Date = DateTime.Now
+            };
+
             await _repo.AddAsync(booking);
+            return true;
         }
 
+        public async Task CancelAsync(int bookingId)
+        {
+            await _repo.RemoveAsync(bookingId);
+        }
+
+        public Task<List<Booking>> GetBookingsByUserIdAsync(string userId)
+            => _repo.GetBookingsByUserIdAsync(userId);
     }
 }

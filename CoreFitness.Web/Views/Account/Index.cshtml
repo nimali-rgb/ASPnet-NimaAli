@@ -1,6 +1,16 @@
-﻿namespace CoreFitness.Web.Views.Account
-{
-    public class Index
-    {
-    }
+﻿@{
+    ViewData["Title"] = "Account Overview";
 }
+
+<div class="container mt-4">
+    <h2>Account Overview</h2>
+    <p class="text-muted">General information about your account.</p>
+
+    <div class="card p-4">
+        <h4>Your Account</h4>
+        <p>This page contains general information about your CoreFitness account.</p>
+
+        <p>You can edit your profile under:</p>
+        <a class="btn btn-primary" href="/Identity/Account/Manage">Manage Profile</a>
+    </div>
+</div>

@@ -4,10 +4,9 @@ namespace CoreFitness.Application.Interfaces
 {
     public interface IBookingRepository
     {
-        Task<IEnumerable<Booking>> GetAllAsync();
-        Task<Booking?> GetByIdAsync(int id);
+        Task<List<Booking>> GetBookingsByUserIdAsync(string userId);
+        Task<bool> IsAlreadyBookedAsync(string userId, int gymClassId);
         Task AddAsync(Booking booking);
-        Task UpdateAsync(Booking booking);
-        Task DeleteAsync(int id);
+        Task RemoveAsync(int bookingId);
     }
 }

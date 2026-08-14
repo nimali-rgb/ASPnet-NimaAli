@@ -1,29 +1,76 @@
 ﻿@model IEnumerable<CoreFitness.Domain.Entities.GymClass>
 
-<h2>Gym Classes</h2>
+<div class="container mt-4">
+    <h2 class="mb-3">Tillgängliga träningspass</h2>
+    <hr />
 
-<a asp-action="Create" class="btn-yellow">Add Class</a>
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Capacity</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var c in Model)
-        {
-            <tr>
-                <td>@c.Name</td>
-                <td>@c.Capacity</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@c.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@c.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@c.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <p>Inga träningspass finns tillgängliga just nu.</p>
+        <p>Skapa ett nytt pass i adminpanelen.</p>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                var booked = item.Bookings?.Count() ?? 0;
+                var remaining = item.Capacity - booked;
+
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+
+                        <div class="card-body">
+
+                            <h4 class="card-title">@item.Name</h4>
+
+                            <p class="card-text mb-1">
+                                <strong>Datum:</strong> @item.Date.ToShortDateString()
+                            </p>
+
+                            <p class="card-text mb-1">
+                                <strong>Tid:</strong> @item.Time.ToString(@"hh\:mm")
+                            </p>
+
+                            <p class="card-text mb-1">
+                                <strong>Kapacitet:</strong> @item.Capacity
+                            </p>
+
+                            <p class="card-text mb-1">
+                                <strong>Platser kvar:</strong> @remaining
+                            </p>
+
+                            <p class="card-text mb-3">
+                                <strong>Tränare:</strong> @item.Teacher?.Name ?? "Ingen tränare"
+                            </p>
+
+                            @if (remaining > 0)
+                            {
+                                <a asp-controller="Booking"
+                                   asp-action="Create"
+                                   asp-route-gymClassId="@item.Id"
+                                   class="btn btn-primary w-100">
+                                    Boka pass
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger w-100 p-2 text-center">Fullt</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -2,65 +2,72 @@
     Layout = "_HomeLayout";
 }
 
-<section class="membership-section">
+<section class="membership-header">
+    <h1>Our Membership Offers</h1>
+</section>
 
-    <div class="membership-grid">
+<section class="membership-cards">
 
-        <!-- Standard -->
-        <div class="membership-card">
-            <h2>Standard Membership</h2>
-            <ul>
-                <li>Access to full range of gym facilities</li>
-                <li>Standard locker</li>
-                <li>High-energy group fitness classes</li>
-                <li>Motivating and supportive environment</li>
-            </ul>
-            <p class="price">495.00 /monthly</p>
-            <p class="note">* Monthly 20 Classes</p>
-            <a class="btn-yellow">Join Now</a>
+    <!-- Standard Membership -->
+    <div class="membership-card">
+        <h2>Standard Membership</h2>
+        <p class="membership-price">$45.00 / month</p>
+
+        <ul class="membership-benefits">
+            <li>Access to gym facilities</li>
+            <li>Unlimited group classes</li>
+            <li>Locker room access</li>
+        </ul>
+
+        <a href="#" class="membership-btn">Get Started</a>
+    </div>
+
+    <!-- Premium Membership -->
+    <div class="membership-card premium">
+        <h2>Premium Membership</h2>
+        <p class="membership-price">$65.00 / month</p>
+
+        <ul class="membership-benefits">
+            <li>Everything in Standard</li>
+            <li>Personal training sessions</li>
+            <li>Nutrition guidance</li>
+        </ul>
+
+        <a href="#" class="membership-btn">Get Started</a>
+    </div>
+
+    <!-- Contact Box -->
+    <div class="membership-contact-box">
+        <h3>Start your fitness journey today</h3>
+        <p>Call Us at <span>+1 (424) 438‑8210</span></p>
+
+        <div class="membership-options">
+            <label><input type="checkbox" /> Get Started Now</label>
+            <label><input type="checkbox" /> Try a Free Trial</label>
+            <label><input type="checkbox" /> Recommend a Friend</label>
         </div>
-
-        <!-- Premium -->
-        <div class="membership-card premium">
-            <h2>Premium Membership</h2>
-            <ul>
-                <li>Everything in Standard</li>
-                <li>Priority support & premium locker</li>
-                <li>High-energy group fitness classes</li>
-                <li>Motivating and supportive environment</li>
-            </ul>
-            <p class="price">595.00 /monthly</p>
-            <p class="note">* Monthly 20 Classes</p>
-            <a class="btn-yellow">Join Now</a>
-        </div>
-
-        <!-- Contact -->
-        <div class="membership-card contact">
-            <h2>Get Your Membership</h2>
-            <p>Memberships give access to all equipment and personalized training.</p>
-            <p class="contact-number">Call Us At: +(46) 8 410 521 00</p>
-            <a class="btn-yellow">Call Us Today!</a>
-
-            <img src="/images/membershipimges1.png" class="contact-img" />
-        </div>
-
     </div>
 
 </section>
 
-<div class="membership-icons">
-    <div class="icon-item">
-        <img src="/images/freeTrial.png" class="icon-img" />
-        <span>Get 30 day free trial</span>
-    </div>
+<!-- First Image -->
+<section class="membership-image-section">
+    <img src="/images/membershipimges1.png" alt="Membership Image" class="membership-full-img" />
+</section>
 
-    <div class="icon-item">
-        <img src="/images/noPay.png" class="icon-img" />
-        <span>No hidden fees</span>
-    </div>
+<section class="membership-faq">
+    <h2>Common questions about gym and training</h2>
 
-    <div class="icon-item">
-        <img src="/images/cancel.png" class="icon-img" />
-        <span>Cancel anytime</span>
+    <div class="faq-list">
+        <p>1. Do I need experience to join the gym?</p>
+        <p>2. What are the gym’s operating hours?</p>
+        <p>3. Can I bring my own training equipment?</p>
+        <p>4. Are group workout programs available?</p>
+        <p>5. Is nutrition guidance included in the plans?</p>
     </div>
-</div>
+</section>
+
+<!-- Second Image -->
+<section class="membership-image-section">
+    <img src="/images/membershipimges2.png" alt="Membership Image" class="membership-full-img" />
+</section>

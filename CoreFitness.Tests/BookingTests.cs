@@ -2,6 +2,7 @@
 using CoreFitness.Application.Services;
 using CoreFitness.Domain.Entities;
 using CoreFitness.Infrastructure.Data;
+using CoreFitness.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 

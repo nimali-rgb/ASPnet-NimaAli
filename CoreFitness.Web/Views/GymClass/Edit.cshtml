@@ -1,9 +1,42 @@
 ﻿@model CoreFitness.Domain.Entities.GymClass
 
-<h2>Edit Gym Class</h2>
+<div class="container mt-4">
+    <h2 class="mb-3">Redigera träningspass</h2>
+    <hr />
 
-<form asp-action="Edit" method="post">
-    <input asp-for="Name" />
-    <input asp-for="Capacity" />
-    <button type="submit" class="btn-yellow">Save</button>
-</form>
+    <form asp-action="Edit" method="post" class="card p-4 shadow-sm">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Namn</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Capacity" class="form-label">Kapacitet</label>
+            <input asp-for="Capacity" class="form-control" type="number" min="1" />
+            <span asp-validation-for="Capacity" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Date" class="form-label">Datum</label>
+            <input asp-for="Date" class="form-control" type="date" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Time" class="form-label">Tid</label>
+            <input asp-for="Time" class="form-control" type="time" />
+            <span asp-validation-for="Time" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Spara</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Tillbaka</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

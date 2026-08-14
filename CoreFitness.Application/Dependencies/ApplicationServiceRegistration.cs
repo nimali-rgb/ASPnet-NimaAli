@@ -2,17 +2,16 @@
 using CoreFitness.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoreFitness.Application.Dependencies;
-
-public static class ApplicationServiceRegistration
+namespace CoreFitness.Application.Dependencies
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static class ApplicationServiceRegistration
     {
-        services.AddScoped<MembershipService>();
-        services.AddScoped<GymClassService>();
-        services.AddScoped<BookingService>();
-        services.AddScoped<TeacherService>();
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<IBookingService, BookingService>();
+            services.AddScoped<IMembershipService, MembershipService>();
 
-        return services;
+            return services;
+        }
     }
 }

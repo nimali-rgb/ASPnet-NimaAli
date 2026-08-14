@@ -3,7 +3,35 @@
 <h2>Add Gym Class</h2>
 
 <form asp-action="Create" method="post">
-    <input asp-for="Name" placeholder="Name" />
-    <input asp-for="Capacity" placeholder="Capacity" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Capacity"></label>
+        <input asp-for="Capacity" class="form-control" type="number" min="1" />
+        <span asp-validation-for="Capacity" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Date"></label>
+        <input asp-for="Date" class="form-control" type="date" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Time"></label>
+        <input asp-for="Time" class="form-control" type="time" />
+        <span asp-validation-for="Time" class="text-danger"></span>
+    </div>
+
     <button type="submit" class="btn-yellow">Save</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

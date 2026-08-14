@@ -1,11 +1,24 @@
-﻿namespace CoreFitness.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class Membership
+namespace CoreFitness.Domain.Entities
 {
-    public int Id { get; set; }
-    public string Type { get; set; } = string.Empty;
-    public decimal Price { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public class Membership
+    {
+        public int Id { get; set; }
 
-    public string UserId { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Typ krävs.")]
+        public string Type { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Pris krävs.")]
+        [Range(1, 9999, ErrorMessage = "Pris måste vara mellan 1 och 9999.")]
+        public decimal Price { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        // Koppling till användaren via UserId (string)
+        public string UserId { get; set; } = string.Empty;
+
+        // Bokningar kopplade till medlemskapet (valfritt)
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+    }
 }

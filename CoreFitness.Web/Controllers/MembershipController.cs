@@ -1,76 +1,53 @@
-﻿using CoreFitness.Application.Services;
+﻿using CoreFitness.Application.Interfaces;
 using CoreFitness.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CoreFitness.Web.Controllers
 {
+    [Authorize]
     public class MembershipController : Controller
     {
-        private readonly MembershipService _service;
+        private readonly IMembershipService _membershipService;
 
-        public MembershipController(MembershipService service)
+        public MembershipController(IMembershipService membershipService)
         {
-            _service = service;
+            _membershipService = membershipService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+            {
+                TempData["Error"] = "Kunde inte hitta användaren.";
+                return RedirectToAction("Index", "MyPage");
+            }
+
+            // Skapa nytt medlemskap-objekt
+            var membership = new Membership
+            {
+                Type = "Standard",
+                Price = 299,
+                UserId = userId,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            // Skicka rätt typ till service
+            await _membershipService.CreateMembershipAsync(membership);
+
+            TempData["Success"] = "Medlemskap skapat!";
+            return RedirectToAction("Index", "MyPage");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var memberships = await _service.GetAllAsync();
-            return View(memberships);
-        }
-
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(Membership membership)
-        {
-            if (!ModelState.IsValid)
-                return View(membership);
-
-            await _service.AddAsync(membership);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Edit(int id)
-        {
-            var membership = await _service.GetByIdAsync(id);
-            if (membership == null) return NotFound();
-
-            return View(membership);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(Membership membership)
-        {
-            if (!ModelState.IsValid)
-                return View(membership);
-
-            await _service.UpdateAsync(membership);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Delete(int id)
-        {
-            var membership = await _service.GetByIdAsync(id);
-            if (membership == null) return NotFound();
-
-            return View(membership);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            await _service.DeleteAsync(id);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var membership = await _service.GetByIdAsync(id);
-            if (membership == null) return NotFound();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var membership = await _membershipService.GetMembershipByUserIdAsync(userId);
 
             return View(membership);
         }

@@ -8,9 +8,8 @@ public static class InfrastructureServiceRegistration
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
     {
-        services.AddScoped<IMembershipRepository, MembershipRepository>();
+       
         services.AddScoped<IGymClassRepository, GymClassRepository>();
-        services.AddScoped<IBookingRepository, BookingRepository>();
         services.AddScoped<ITeacherRepository, TeacherRepository>();
 
         return services;

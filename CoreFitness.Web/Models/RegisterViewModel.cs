@@ -2,15 +2,15 @@
 
 public class RegisterViewModel
 {
-    [Required]
-    [EmailAddress]
-    public string? Email { get; set; }
+    [Required(ErrorMessage = "Email krävs.")]
+    [EmailAddress(ErrorMessage = "Ogiltig email.")]
+    public string Email { get; set; } = string.Empty;
 
-    [Required]
-    [MinLength(6)]
-    public string? Password { get; set; }
+    [Required(ErrorMessage = "Lösenord krävs.")]
+    [MinLength(6, ErrorMessage = "Lösenord måste vara minst 6 tecken.")]
+    public string Password { get; set; } = string.Empty;
 
-    [Required]
-    [Compare("Password")]
-    public string? ConfirmPassword { get; set; }
+    [Required(ErrorMessage = "Bekräfta lösenord.")]
+    [Compare("Password", ErrorMessage = "Lösenorden matchar inte.")]
+    public string ConfirmPassword { get; set; } = string.Empty;
 }

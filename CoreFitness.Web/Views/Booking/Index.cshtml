@@ -1,31 +1,36 @@
 ﻿@model IEnumerable<CoreFitness.Domain.Entities.Booking>
 
-<h2>Bookings</h2>
+<h1>Mina bokningar</h1>
 
-<a asp-action="Create" class="btn-yellow">Add Booking</a>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>Class</th>
-            <th>Date</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var b in Model)
-        {
+@if (!Model.Any())
+{
+    <p>Du har inga bokningar ännu.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@b.UserId</td>
-                <td>@b.GymClassId</td>
-                <td>@b.Date</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@b.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@b.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@b.Id">Delete</a>
-                </td>
+                <th>Pass</th>
+                <th>Datum</th>
+                <th>Tid</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.GymClass.Name</td>
+                    <td>@booking.GymClass.Date.ToShortDateString()</td>
+                    <td>@booking.GymClass.Time</td>
+                    <td>
+                        <a asp-controller="Booking" asp-action="Cancel" asp-route-id="@booking.Id" class="btn btn-danger">
+                            Avboka
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

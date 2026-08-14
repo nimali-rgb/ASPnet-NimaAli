@@ -6,15 +6,26 @@
 
         <div class="cf-nav-links">
             <a class="cf-nav-link" asp-controller="Home" asp-action="Index">Home</a>
-            <a class="cf-nav-link" asp-controller="Classes" asp-action="Index">Classes</a>
+            <a class="cf-nav-link" asp-controller="GymClass" asp-action="Index">Classes</a>
             <a class="cf-nav-link" asp-controller="Booking" asp-action="MyBookings">My Bookings</a>
             <a class="cf-nav-link" asp-controller="Membership" asp-action="Index">Membership</a>
-            <a class="cf-nav-link" asp-controller="Membership" asp-action="Costumer Service">Costumer Service</a>
+
+            <!-- FIXAD: Customer Service -->
+            <a class="cf-nav-link" asp-controller="CustomerService" asp-action="Index">Customer Service</a>
+
+            <!-- FIXAD: Account -->
+            <a class="cf-nav-link" asp-controller="Account" asp-action="Index">Account</a>
+
+            <!-- FIXAD: Booking Overview -->
+            <a class="cf-nav-link" asp-controller="Booking" asp-action="Index">Booking</a>
+
+            <a class="nav-link" href="/MyPage">My Page</a>
         </div>
     </div>
 
     <div class="cf-nav-right">
-        <a class="cf-btn-nav-primary" asp-controller="Account" asp-action="Login">Login</a>
-        <a class="cf-btn-nav-secondary" asp-controller="Account" asp-action="Register">Sign Up</a>
+        <a class="cf-btn-nav-primary" href="/Identity/Account/Login?returnUrl=/MyPage">Login</a>
+        <a class="cf-btn-nav-secondary" href="/Identity/Account/Register?returnUrl=/MyPage">Sign Up</a>
+
     </div>
 </nav>
